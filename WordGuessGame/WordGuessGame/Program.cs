@@ -23,6 +23,7 @@ namespace WordGuessGame
             {
                 try
                 {
+                    //Add words to file
                     for(int i=0; i < words.Length; i++)
                     {
                         sw.WriteLine(words[i]);
@@ -34,5 +35,40 @@ namespace WordGuessGame
                 }
             }
         }
+
+        /// <summary>
+        /// Appends the specified word to the end of the specified file, otherwise
+        /// returns an exception
+        /// </summary>
+        /// <param name="path">Path of file to append to</param>
+        /// <param name="word">Word to append</param>
+        public static void AppendWordToFile(string path, string word)
+        {
+            try
+            {
+                if (File.Exists(path))
+                {
+                    using (StreamWriter sw = File.AppendText(path))
+                    {
+                        try
+                        {
+
+                        }
+                        catch
+                        {
+                            throw;
+                        }
+                    }
+                }
+                else throw new Exception("File does not exist.");
+            }
+            catch
+            {
+                throw;
+            }
+            
+        }
     }
+
+
 }

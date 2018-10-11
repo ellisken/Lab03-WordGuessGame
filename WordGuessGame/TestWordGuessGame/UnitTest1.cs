@@ -52,5 +52,34 @@ namespace TestWordGuessGame
             Assert.NotNull(exception);
             Assert.IsType<System.IO.IOException>(exception);
         }
+
+        //Test append to file success
+        [Fact]
+        public void TestAppendToFileSuccess()
+        {
+            string path = "../../../testFile.txt";
+            string word = "newWord";
+
+            try
+            {
+                Program.AppendWordToFile(path, word);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        //Test append to file success
+        [Fact]
+        public void TestAppendToFileFailure()
+        {
+            string path = "../../../testFile";
+            string word = "newWord";
+
+            Exception exception = Record.Exception(() => Program.AppendWordToFile(path, word));
+            Assert.NotNull(exception);
+            Assert.IsType<System.Exception>(exception);
+        }
     }
 }
