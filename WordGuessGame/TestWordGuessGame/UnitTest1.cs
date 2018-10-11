@@ -29,7 +29,7 @@ namespace TestWordGuessGame
                 "file",
             };
 
-            Program.WriteToOrCreateFile(path, words);
+            Program.OverwriteOrCreateFile(path, words);
 
             Assert.True(File.Exists(path));
         }
@@ -48,7 +48,7 @@ namespace TestWordGuessGame
                 "here"
             };
 
-            Exception exception = Record.Exception(() => Program.WriteToOrCreateFile(path, words));
+            Exception exception = Record.Exception(() => Program.OverwriteOrCreateFile(path, words));
             Assert.NotNull(exception);
             Assert.IsType<System.IO.IOException>(exception);
         }

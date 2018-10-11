@@ -8,6 +8,7 @@ namespace WordGuessGame
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Josie Cat's Word Guessing Game!");
+            
         }
 
 
@@ -17,7 +18,7 @@ namespace WordGuessGame
         /// </summary>
         /// <param name="path">The path where the file exists or should be created</param>
         /// <param name="words">An array of words that should be added to the file</param>
-        public static void WriteToOrCreateFile(string path, string[] words)
+        public static void OverwriteOrCreateFile(string path, string[] words)
         {
             using (StreamWriter sw = new StreamWriter(path))
             {
@@ -52,7 +53,8 @@ namespace WordGuessGame
                     {
                         try
                         {
-
+                            Console.WriteLine("appending to file");
+                            sw.WriteLine(word);
                         }
                         catch
                         {
