@@ -81,5 +81,13 @@ namespace TestWordGuessGame
             Assert.NotNull(exception);
             Assert.IsType<System.Exception>(exception);
         }
+
+        //Test can retrieve all words from file
+
+        //Test new word added to file
+
+        //Test delete from file success
+
+        //Test delete from file failure
     }
 }

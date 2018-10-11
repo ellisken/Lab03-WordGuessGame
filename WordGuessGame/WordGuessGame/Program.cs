@@ -11,6 +11,36 @@ namespace WordGuessGame
             
         }
 
+        /// <summary>
+        /// Loads all lines from specified file to an array
+        /// of strings
+        /// </summary>
+        /// <param name="path">File path</param>
+        /// <returns>An array of words from the file</returns>
+        public static string[] GetWordsFromFile(string path)
+        {
+            try
+            {
+                string[] mysteryWords = File.ReadAllLines(path);
+                return mysteryWords;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Displays all words from an array of words
+        /// </summary>
+        /// <param name="words">The array of words to be displayed</param>
+        public static void DisplayAllWords(string[] words)
+        {
+            foreach(string word in words)
+            {
+                Console.WriteLine(word);
+            }
+        }
 
         /// <summary>
         /// Creates a file with the given path and writes each word from
@@ -70,6 +100,8 @@ namespace WordGuessGame
             }
             
         }
+
+
     }
 
 
