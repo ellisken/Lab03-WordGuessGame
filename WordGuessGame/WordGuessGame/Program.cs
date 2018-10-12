@@ -8,6 +8,8 @@ namespace WordGuessGame
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Josie Cat's Word Guessing Game!");
+            char result = GetAndValidateLetterGuess();
+            Console.WriteLine("You chose {0}", result);
 
             
         }
@@ -210,6 +212,26 @@ namespace WordGuessGame
             }
             
             return word;
+        }
+
+        public static char GetAndValidateLetterGuess()
+        {
+            bool validInput = false;
+            string guess = "";
+            while (!validInput)
+            {
+                Console.WriteLine("\n\nGuess a letter: ");
+                guess = Console.ReadLine();
+                bool letterConditionsNotMet = guess.Length > 1 || !char.IsLetter(guess[0]);
+                //Check that word has no spaces, is a word
+                if (letterConditionsNotMet)
+                {
+                    Console.WriteLine("\n\nCharacter not recognized.");
+                    continue;
+                }
+                else validInput = true;
+            }
+            return guess[0];
         }
     }
 
