@@ -8,8 +8,7 @@ namespace WordGuessGame
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Josie Cat's Word Guessing Game!");
-            int result = GetAndValidateMenuChoice();
-            Console.WriteLine("You chose {0}", result);
+
             
         }
 
@@ -176,7 +175,33 @@ namespace WordGuessGame
 
         public static string GetAndValidateWordForAddDelete()
         {
-            return "string";
+            bool validInput = false;
+            string word = "";
+            while(!validInput)
+            {
+                Console.WriteLine("\n\nPlease enter word: ");
+                word = Console.ReadLine();
+                bool wordConditionsNotMet = word.Contains(" ") || word.Length < 1;
+                //Check word is alpha only
+                bool isAlphaOnly = true;
+                foreach (char character in word)
+                {
+                    if (!char.IsLetter(character))
+                    {
+                        isAlphaOnly = false;
+                        break;
+                    }
+                }
+                //Check that word has no spaces, is a word
+                if (wordConditionsNotMet || !isAlphaOnly)
+                {
+                    Console.WriteLine("\n\nInvalid word. Words must not contain spaces or non-alpha characters");
+                    continue;
+                }
+                else validInput = true;
+            }
+            
+            return word;
         }
     }
 
