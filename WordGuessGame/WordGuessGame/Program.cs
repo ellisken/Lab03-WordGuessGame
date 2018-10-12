@@ -69,7 +69,8 @@ namespace WordGuessGame
                     //Add words to file
                     for(int i=0; i < words.Length; i++)
                     {
-                        sw.WriteLine(words[i]);
+                        //Only write if word is not empty string
+                        if(words[i] != "") sw.WriteLine(words[i]);
                     }
                 }
                 catch (Exception)
@@ -110,6 +111,35 @@ namespace WordGuessGame
                 throw;
             }
             
+        }
+
+        /// <summary>
+        /// Deletes all occurrences of a specified word from the specified file
+        /// </summary>
+        /// <param name="path">File path</param>
+        /// <param name="wordToDelete">Word to delete</param>
+        public static void DeleteWordFromFile(string path, string wordToDelete)
+        {
+            //Get words
+            string[] words = GetWordsFromFile(path);
+
+            //New array of words with wordToDelete omitted
+            string[] wordsAfterDeletion = new string[words.Length];
+
+            //Fill wordsAfterDeletion
+            for(int i=0; i < words.Length; i++)
+            {
+                //If line matches wordToDelete, insert empty string
+                if (words[i].Contains(wordToDelete))
+                {
+                    wordsAfterDeletion[i] = "";
+                }
+
+                else wordsAfterDeletion[i] = words[i];
+            }
+
+            //Overwrite original file with wordsAfterDeletion
+            OverwriteOrCreateFile(path, wordsAfterDeletion);
         }
 
 

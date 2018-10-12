@@ -118,7 +118,33 @@ namespace TestWordGuessGame
         }
 
         //Test delete from file success
+        [Fact]
+        public void TestDeleteFromFileSuccess()
+        {
+            string path = "../../../testFile2.txt";
+            string[] words = {
+                "I",
+                "am",
+                "another",
+                "test",
+                "file",
+            };
 
-        //Test delete from file failure
+            string wordToDelete = "another";
+
+            //Call method to create file with expected contents
+            Program.OverwriteOrCreateFile(path, words);
+
+            //Run Delete to remove 1 line from words
+            Program.DeleteWordFromFile(path, wordToDelete);
+
+            //Get all words from file
+            string[] wordsWithoutDeletedWord = Program.GetWordsFromFile(path);
+
+            //Check old and new words.Length
+            Assert.Equal(words.Length - 1, wordsWithoutDeletedWord.Length);
+        }
+
+        //Test delete from file failure (invalid path)
     }
 }
