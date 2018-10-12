@@ -5,13 +5,88 @@ namespace WordGuessGame
 {
     public class Program
     {
+        private const int MenuChoiceCt = 5;
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Josie Cat's Word Guessing Game!");
-            char result = GetAndValidateLetterGuess();
-            Console.WriteLine("You chose {0}", result);
+            string path = "../../../mysteryWords.txt";
+            string[] words = {
+                "catnip",
+                "salmon",
+                "yarn",
+                "feathers",
+                "meow",
+            };
 
-            
+            try
+            {
+                //Create mystery words file
+                OverwriteOrCreateFile(path, words);
+                //Welcome User
+                Console.WriteLine("Welcome to Josie Cat's Word Guessing Game!");
+                //Display Menu (which handles game play)
+                HomeNavigation(path);
+            }
+            catch
+            {
+                //log error
+            }
+            finally
+            {
+                //exit game
+            }
+        }
+
+        public static void HomeNavigation(string path)
+        {
+            string menuOptions = "1: PLAY\n2: SEE WORDS\n3: ADD WORD\n4: DELETE WORD\n5: EXIT";
+
+
+            //Display menu
+            Console.WriteLine(menuOptions);
+            //Get user choice
+            int userMenuChoice = GetAndValidateMenuChoice();
+            //Execute choice
+            try
+            {
+                string word = ""; //stores word for add or delete
+
+                switch (userMenuChoice)
+                {
+                    //Play game
+                    case 1:
+                        Console.WriteLine("Play game!");
+                        break;
+                    //Show words
+                    case 2:
+                        string[] words = GetWordsFromFile(path);
+                        DisplayAllWords(words);
+                        break;
+                    //Add word
+                    case 3:
+                        Console.WriteLine("\n\nAdd chosen.");
+                        word = GetAndValidateWordForAddDelete();
+                        AppendWordToFile(path, word);
+                        break;
+                    //Delete word
+                    case 4:
+                        Console.WriteLine("\n\nDelete chosen.");
+                        word = GetAndValidateWordForAddDelete();
+                        DeleteWordFromFile(path, word);
+                        break;
+                    //Exit game
+                    case 5:
+                        break;
+                }
+            }
+            catch
+            {
+                //log error
+            }
+            finally
+            {
+                //exit game
+            }
         }
 
         /// <summary>
@@ -168,7 +243,7 @@ namespace WordGuessGame
                     continue;
                 }
                 //Reprompt if number is not in menu
-                else if (userChoiceVal < 1 || userChoiceVal > 4)
+                else if (userChoiceVal < 1 || userChoiceVal > MenuChoiceCt)
                 {
                     Console.WriteLine("\nMenu selection not recognized.");
                     continue;
@@ -214,6 +289,10 @@ namespace WordGuessGame
             return word;
         }
 
+        /// <summary>
+        /// Gets and validates a user's letter guess
+        /// </summary>
+        /// <returns>The letter the user chose</returns>
         public static char GetAndValidateLetterGuess()
         {
             bool validInput = false;
@@ -232,6 +311,24 @@ namespace WordGuessGame
                 else validInput = true;
             }
             return guess[0];
+        }
+
+        
+        /// <summary>
+        /// Exits the game with a goodby message
+        /// </summary>
+        /// <param name="status">Game status. 0 is good, nonzero means an error occurred</param>
+        public static void ExitGame(int status)
+        {
+            if(status == 0)
+            {
+                Console.WriteLine("Goodbye!");
+            }
+            else
+            {
+                Console.WriteLine("Error occurred. Exiting game.");
+            }
+            Environment.Exit(status);
         }
     }
 
