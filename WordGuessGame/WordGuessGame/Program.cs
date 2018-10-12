@@ -25,7 +25,8 @@ namespace WordGuessGame
                 //Welcome User
                 Console.WriteLine("Welcome to Josie Cat's Word Guessing Game!");
                 //Display Menu (which handles game play)
-                HomeNavigation(path);
+                //HomeNavigation(path);
+
             }
             catch
             {
@@ -115,7 +116,7 @@ namespace WordGuessGame
             {
                 throw;
             }
-            
+
         }
 
         /// <summary>
@@ -124,7 +125,7 @@ namespace WordGuessGame
         /// <param name="words">The array of words to be displayed</param>
         public static void DisplayAllWords(string[] words)
         {
-            foreach(string word in words)
+            foreach (string word in words)
             {
                 Console.WriteLine(word);
             }
@@ -143,10 +144,10 @@ namespace WordGuessGame
                 try
                 {
                     //Add words to file
-                    for(int i=0; i < words.Length; i++)
+                    for (int i = 0; i < words.Length; i++)
                     {
                         //Only write if word is not empty string
-                        if(words[i] != "") sw.WriteLine(words[i]);
+                        if (words[i] != "") sw.WriteLine(words[i]);
                     }
                 }
                 catch (Exception)
@@ -186,7 +187,7 @@ namespace WordGuessGame
             {
                 throw;
             }
-            
+
         }
 
         /// <summary>
@@ -203,7 +204,7 @@ namespace WordGuessGame
             string[] wordsAfterDeletion = new string[words.Length];
 
             //Fill wordsAfterDeletion
-            for(int i=0; i < words.Length; i++)
+            for (int i = 0; i < words.Length; i++)
             {
                 //If line matches wordToDelete, insert empty string
                 if (words[i].Contains(wordToDelete))
@@ -229,7 +230,7 @@ namespace WordGuessGame
             int userChoiceVal = -1;
 
             //While user input is invalid, reprompt
-            while(!validInput)
+            while (!validInput)
             {
                 //Prompt user for menu choice
                 Console.WriteLine("\n\nPlease enter your choice:");
@@ -260,7 +261,7 @@ namespace WordGuessGame
         {
             bool validInput = false;
             string word = "";
-            while(!validInput)
+            while (!validInput)
             {
                 Console.WriteLine("\n\nPlease enter word: ");
                 word = Console.ReadLine();
@@ -283,7 +284,7 @@ namespace WordGuessGame
                 }
                 else validInput = true;
             }
-            
+
             return word;
         }
 
@@ -317,7 +318,7 @@ namespace WordGuessGame
         /// <param name="status">Game status. 0 is good, nonzero means an error occurred</param>
         public static void ExitGame(int status)
         {
-            if(status == 0)
+            if (status == 0)
             {
                 Console.WriteLine("Goodbye!");
             }
@@ -327,7 +328,45 @@ namespace WordGuessGame
             }
             Environment.Exit(status);
         }
+
+        public static void GamePlay()
+        {
+
+        }
+
+        /// <summary>
+        /// Returns a word from the input array chosen at random
+        /// </summary>
+        /// <param name="words">An array of words to choose from</param>
+        /// <returns>Randomly chosen word from input array</returns>
+        public static string GetRandomWord(string[] words)
+        {
+            //Generate random index within range
+            Random rand = new Random();
+            int randomIndex = rand.Next(0, words.Length);
+            //Return string at index
+            return words[randomIndex];
+        }
+
+        public static string CreateMysteryString()
+        {
+            return "string";
+        }
+
+        public static void ProcessLetterGuess()
+        {
+
+        }
+
+        public static bool FullWordGuessed(string mysterString)
+        {
+            return true;
+        }
+
+        public static void DisplayCurrentGameState()
+        {
+
+        }
+
     }
-
-
 }
