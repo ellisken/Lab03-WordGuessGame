@@ -83,8 +83,39 @@ namespace TestWordGuessGame
         }
 
         //Test can retrieve all words from file
+        [Fact]
+        public void TestGetWordsFromFileValidPath()
+        {
+            string path = "../../../testFile2.txt";
+            string[] words = {
+                "I",
+                "am",
+                "another",
+                "test",
+                "file",
+            };
+
+            //Call method to create file with expected contents
+            Program.OverwriteOrCreateFile(path, words);
+            //Get contents with GetWordsFromFile
+            string[] retrievedWords = Program.GetWordsFromFile(path);
+            //Check size is same
+            Assert.Equal(words.Length, retrievedWords.Length);
+        }
 
         //Test new word added to file
+        [Fact]
+        public void TestAppendToFileWordAdded()
+        {
+            string path = "../../../testFile.txt";
+            string word = "newWord";
+
+            string[] wordsBeforeAppend = Program.GetWordsFromFile(path);
+            Program.AppendWordToFile(path, word);
+            string[] retrievedWords = Program.GetWordsFromFile(path);
+            Assert.Equal(wordsBeforeAppend.Length + 1, retrievedWords.Length);
+
+        }
 
         //Test delete from file success
 

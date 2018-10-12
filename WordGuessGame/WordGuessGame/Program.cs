@@ -21,13 +21,25 @@ namespace WordGuessGame
         {
             try
             {
-                string[] mysteryWords = File.ReadAllLines(path);
-                return mysteryWords;
+                if (File.Exists(path))
+                {
+                    try
+                    {
+                        string[] mysteryWords = File.ReadAllLines(path);
+                        return mysteryWords;
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+                else throw new Exception("File does not exist.");
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }
+            
         }
 
         /// <summary>
@@ -76,14 +88,13 @@ namespace WordGuessGame
         public static void AppendWordToFile(string path, string word)
         {
             try
-            {
+            {   //If file exists, append word
                 if (File.Exists(path))
                 {
                     using (StreamWriter sw = File.AppendText(path))
                     {
                         try
                         {
-                            Console.WriteLine("appending to file");
                             sw.WriteLine(word);
                         }
                         catch
