@@ -143,6 +143,11 @@ namespace WordGuessGame
             OverwriteOrCreateFile(path, wordsAfterDeletion);
         }
 
+        /// <summary>
+        /// Prompts the user for their menu selection and validates the selection,
+        /// otherwise reprompts the user until a valid selection is entered
+        /// </summary>
+        /// <returns>The user's menu selection</returns>
         public static int GetAndValidateMenuChoice()
         {
             bool validInput = false;
@@ -172,7 +177,10 @@ namespace WordGuessGame
             return userChoiceVal;
         }
 
-
+        /// <summary>
+        /// Gets and validates a user's word to add or delete
+        /// </summary>
+        /// <returns>The word the user wants to delete from the word file</returns>
         public static string GetAndValidateWordForAddDelete()
         {
             bool validInput = false;
