@@ -8,6 +8,8 @@ namespace WordGuessGame
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Josie Cat's Word Guessing Game!");
+            int result = GetAndValidateMenuChoice();
+            Console.WriteLine("You chose {0}", result);
             
         }
 
@@ -142,7 +144,40 @@ namespace WordGuessGame
             OverwriteOrCreateFile(path, wordsAfterDeletion);
         }
 
+        public static int GetAndValidateMenuChoice()
+        {
+            bool validInput = false;
+            int userChoiceVal = -1;
 
+            //While user input is invalid, reprompt
+            while(!validInput)
+            {
+                //Prompt user for menu choice
+                Console.WriteLine("\n\nPlease enter your choice:");
+                string userChoice = Console.ReadLine();
+                //Reprompt if number not entered
+                if (!Int32.TryParse(userChoice, out userChoiceVal))
+                {
+                    Console.WriteLine("\nChoice unrecognized.");
+                    continue;
+                }
+                //Reprompt if number is not in menu
+                else if (userChoiceVal < 1 || userChoiceVal > 4)
+                {
+                    Console.WriteLine("\nMenu selection not recognized.");
+                    continue;
+                }
+                else validInput = true;
+            }
+
+            return userChoiceVal;
+        }
+
+
+        public static string GetAndValidateWordForAddDelete()
+        {
+            return "string";
+        }
     }
 
 
