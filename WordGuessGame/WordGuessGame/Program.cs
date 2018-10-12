@@ -29,14 +29,15 @@ namespace WordGuessGame
             }
             catch
             {
-                //log error
-            }
-            finally
-            {
-                //exit game
+                ExitGame(1);
             }
         }
 
+        /// <summary>
+        /// Displays the menu and processes the user's menu choice, executing
+        /// the next step.
+        /// </summary>
+        /// <param name="path">File path for mystery words file</param>
         public static void HomeNavigation(string path)
         {
             string menuOptions = "1: PLAY\n2: SEE WORDS\n3: ADD WORD\n4: DELETE WORD\n5: EXIT";
@@ -76,16 +77,13 @@ namespace WordGuessGame
                         break;
                     //Exit game
                     case 5:
+                        ExitGame(0);
                         break;
                 }
             }
             catch
             {
-                //log error
-            }
-            finally
-            {
-                //exit game
+                ExitGame(1);
             }
         }
 
@@ -313,9 +311,8 @@ namespace WordGuessGame
             return guess[0];
         }
 
-        
         /// <summary>
-        /// Exits the game with a goodby message
+        /// Exits the game with a goodbye message
         /// </summary>
         /// <param name="status">Game status. 0 is good, nonzero means an error occurred</param>
         public static void ExitGame(int status)
