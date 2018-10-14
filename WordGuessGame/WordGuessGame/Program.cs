@@ -24,8 +24,11 @@ namespace WordGuessGame
                 OverwriteOrCreateFile(path, words);
                 //Welcome User
                 Console.WriteLine("Welcome to Josie Cat's Word Guessing Game!");
-                //Display Menu (which handles game play)
-                while(true) HomeNavigation(path);
+                //Display Menu (which handles game play) until the user chooses to exit
+                while (true)
+                {
+                    HomeNavigation(path);
+                }
             }
             //If any exception occurs with system I/O, exit game
             catch
@@ -42,7 +45,7 @@ namespace WordGuessGame
         /// <param name="path">File path for mystery words file</param>
         public static void HomeNavigation(string path)
         {
-            string menuOptions = "1: PLAY\n2: SEE WORDS\n3: ADD WORD\n4: DELETE WORD\n5: EXIT";
+            string menuOptions = "\n\n1: PLAY\n2: SEE WORDS\n3: ADD WORD\n4: DELETE WORD\n5: EXIT";
 
             //Display menu
             Console.WriteLine(menuOptions);
@@ -66,13 +69,13 @@ namespace WordGuessGame
                         break;
                     //Add word
                     case 3:
-                        Console.WriteLine("\n\nAdd chosen.");
+                        Console.WriteLine("\nAdd chosen.");
                         word = GetAndValidateWordForAddDelete();
                         AppendWordToFile(path, word);
                         break;
                     //Delete word
                     case 4:
-                        Console.WriteLine("\n\nDelete chosen.");
+                        Console.WriteLine("\nDelete chosen.");
                         word = GetAndValidateWordForAddDelete();
                         DeleteWordFromFile(path, word);
                         break;
@@ -125,6 +128,7 @@ namespace WordGuessGame
         /// <param name="words">The array of words to be displayed</param>
         public static void DisplayAllWords(string[] words)
         {
+            Console.WriteLine();
             foreach (string word in words)
             {
                 Console.WriteLine(word);
@@ -358,8 +362,9 @@ namespace WordGuessGame
             }
 
             //Display full word and present options
-            Console.WriteLine("\nCongratulations! You've guessed the whole word!");
             DisplayCurrentGameState(mysteryWordArray, pastGuesses);
+            Console.WriteLine("\n\n\n*** Congratulations! You've guessed the whole word! ***");
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -439,7 +444,7 @@ namespace WordGuessGame
         {
             //Display the mystery string
             Console.Write("\n\n");
-            Console.Write("Mystery Word: ");
+            Console.Write("--> Mystery Word: ");
             for(int i=0; i < mysteryWord.Length; i++)
             {
                 Console.Write($"{mysteryWord[i]} ");
@@ -447,7 +452,7 @@ namespace WordGuessGame
             Console.WriteLine();
 
             //Display guessses so far
-            Console.Write("\nLetters guessed: ");
+            Console.Write("\n--> Letters guessed: ");
             for(int i = 0; i < pastGuesses.Length; i++)
             {
                 Console.Write($"{pastGuesses[i]} ");
