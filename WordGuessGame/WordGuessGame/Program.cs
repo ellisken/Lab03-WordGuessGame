@@ -406,9 +406,9 @@ namespace WordGuessGame
             //Replace occurrences of the guess in the mysteryWord array
             for(int i=0; i < word.Length; i++)
             {
-                if(word[i] == guess[0])
+                if(char.ToUpper(word[i]) == char.ToUpper(guess[0]))
                 {
-                    mysteryWord[i] = guess[0];
+                    mysteryWord[i] = char.ToLower(guess[0]);
                     flag = true;
                 }
             }
@@ -439,6 +439,7 @@ namespace WordGuessGame
         {
             //Display the mystery string
             Console.Write("\n\n");
+            Console.Write("Mystery Word: ");
             for(int i=0; i < mysteryWord.Length; i++)
             {
                 Console.Write($"{mysteryWord[i]} ");
