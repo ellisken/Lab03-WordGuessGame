@@ -8,11 +8,6 @@ namespace TestWordGuessGame
     public class UnitTest1
     {
         /* REQUIRED:
-         * Test file can be created
-         * Test file can be updated
-         * Test file can be deleted
-         * Test word can be added to file
-         * Test retrieve all words from file
          * Test letter exists method valid and invalid
          */
 
@@ -145,6 +140,28 @@ namespace TestWordGuessGame
             Assert.Equal(words.Length - 1, wordsWithoutDeletedWord.Length);
         }
 
-        //Test delete from file failure (invalid path)
+        //Test letter exists method valid
+        [Fact]
+        public void TestLetterInWord()
+        {
+            string letter = "l";
+            string word = "hello";
+            char[] mysteryString = { 'h', '_', '_', '_', 'o' };
+
+            Assert.True(Program.LetterInWord(letter, word, mysteryString));
+        }
+
+        //Test letter exists invalid
+        [Fact]
+        public void TestLetterNotInWord()
+        {
+            string letter = "y";
+            string word = "hello";
+            char[] mysteryString = { 'h', '_', '_', '_', 'o' };
+
+            Assert.False(Program.LetterInWord(letter, word, mysteryString));
+        }
+
+        //Test letter exists replaces occurrence of letter in mystery word
     }
 }

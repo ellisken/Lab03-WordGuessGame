@@ -348,24 +348,80 @@ namespace WordGuessGame
             return words[randomIndex];
         }
 
-        public static string CreateMysteryString()
+        /// <summary>
+        /// Returns a string of underscores the same length as the mystery word
+        /// </summary>
+        /// <param name="word">The word the user will guess</param>
+        /// <returns>A char array of underscores the same length as the mystery word</returns>
+        public static char[] CreateMysteryString(string word)
         {
-            return "string";
+            string mysteryString = "";
+            for(int i=0; i < word.Length; i++)
+            {
+                mysteryString += "_";
+            }
+            return mysteryString.ToCharArray();
         }
 
-        public static void ProcessLetterGuess()
+        /// <summary>
+        /// Processes the user's guess, adding that letter to the mystery
+        /// string for each occurrence in the original word. Also adds the user's guess
+        /// to the string of past guesses
+        /// </summary>
+        /// <param name="guess">The letter entered by the user</param>
+        /// <param name="word">The mystery word</param>
+        /// <param name="mysteryWord">The mystery string of underscores</param>
+        /// <return>True if the letter was in the word, otherwise false</return>
+        public static bool LetterInWord(string guess, string word, char[] mysteryWord)
         {
-
+            bool flag = false; //For tracking whether the guess is in the mystery word
+            //Replace occurrences of the guess in the mysteryWord array
+            for(int i=0; i < word.Length; i++)
+            {
+                if(word[i] == guess[0])
+                {
+                    mysteryWord[i] = guess[0];
+                    flag = true;
+                }
+            }
+            if (flag) return true;
+            return false;
         }
 
-        public static bool FullWordGuessed(string mysterString)
+        /// <summary>
+        /// Checks whether the entire mystery string has been guessed
+        /// </summary>
+        /// <param name="mysteryString">The "mystery" string that represents the word to be guessed</param>
+        /// <returns>True if there are no more underscores, else returns false</returns>
+        public static bool FullWordGuessed(char[] mysteryString)
         {
+            for(int i=0; i < mysteryString.Length; i++)
+            {
+                if (mysteryString[i] == '_') return false;
+            }
             return true;
         }
 
-        public static void DisplayCurrentGameState()
+        /// <summary>
+        /// Displays the mystery string and the user's past guesses
+        /// </summary>
+        /// <param name="mysteryWord">The array used to track the mystery word</param>
+        /// <param name="pastGuesses">The user's past letter guesses</param>
+        public static void DisplayCurrentGameState(char[] mysteryWord, string pastGuesses)
         {
+            //Display the mystery string
+            for(int i=0; i < mysteryWord.Length; i++)
+            {
+                Console.Write("\n\n");
+                Console.Write($"{mysteryWord[i]} ");
+            }
 
+            //Display guessses so far
+            Console.Write("Letters guessed: ");
+            for(int i = 0; i < pastGuesses.Length; i++)
+            {
+                Console.Write($"{pastGuesses[i]} ");
+            }
         }
 
     }
