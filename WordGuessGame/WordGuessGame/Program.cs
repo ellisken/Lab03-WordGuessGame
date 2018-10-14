@@ -72,12 +72,14 @@ namespace WordGuessGame
                         Console.WriteLine("\nAdd chosen.");
                         word = GetAndValidateWordForAddDelete();
                         AppendWordToFile(path, word);
+                        Console.WriteLine($"{word} successfully added.");
                         break;
                     //Delete word
                     case 4:
                         Console.WriteLine("\nDelete chosen.");
                         word = GetAndValidateWordForAddDelete();
                         DeleteWordFromFile(path, word);
+                        Console.WriteLine($"{word} successfully deleted.");
                         break;
                     //Exit game
                     case 5:
