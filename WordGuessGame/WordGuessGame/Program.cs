@@ -25,11 +25,12 @@ namespace WordGuessGame
                 //Welcome User
                 Console.WriteLine("Welcome to Josie Cat's Word Guessing Game!");
                 //Display Menu (which handles game play)
-                //HomeNavigation(path);
-
+                while(true) HomeNavigation(path);
             }
+            //If any exception occurs with system I/O, exit game
             catch
             {
+                Console.WriteLine("Error occurred during file access. Exiting Game.");
                 ExitGame(1);
             }
         }
@@ -42,7 +43,6 @@ namespace WordGuessGame
         public static void HomeNavigation(string path)
         {
             string menuOptions = "1: PLAY\n2: SEE WORDS\n3: ADD WORD\n4: DELETE WORD\n5: EXIT";
-
 
             //Display menu
             Console.WriteLine(menuOptions);
@@ -57,7 +57,7 @@ namespace WordGuessGame
                 {
                     //Play game
                     case 1:
-                        Console.WriteLine("Play game!");
+                        GamePlay(path);
                         break;
                     //Show words
                     case 2:
@@ -292,7 +292,7 @@ namespace WordGuessGame
         /// Gets and validates a user's letter guess
         /// </summary>
         /// <returns>The letter the user chose</returns>
-        public static char GetAndValidateLetterGuess()
+        public static string GetAndValidateLetterGuess()
         {
             bool validInput = false;
             string guess = "";
@@ -309,7 +309,7 @@ namespace WordGuessGame
                 }
                 else validInput = true;
             }
-            return guess[0];
+            return guess;
         }
 
         /// <summary>
@@ -329,9 +329,37 @@ namespace WordGuessGame
             Environment.Exit(status);
         }
 
-        public static void GamePlay()
+        /// <summary>
+        /// Controls the game play: present user with word and allows the user
+        /// to guess letters until the full word has been guessed
+        /// </summary>
+        /// <param name="path">Path to the file of possible mystery words</param>
+        public static void GamePlay(string path)
         {
+            string pastGuesses = ""; //Tracks user letter guesses
+            string[] words = GetWordsFromFile(path);
+            string word = GetRandomWord(words);
 
+            //Create mystery string
+            char[] mysteryWordArray = CreateMysteryString(word);
+            bool wordGuessed = FullWordGuessed(mysteryWordArray);
+
+            while(!wordGuessed)
+            {
+                //Display results
+                DisplayCurrentGameState(mysteryWordArray, pastGuesses);
+                string guess = GetAndValidateLetterGuess();
+                //Process letter guess and update pastGuesses
+                //this bool "correctGuess" is not currently used, but could be useful if the game is refactored
+                bool correctGuess = LetterInWord(guess, word, mysteryWordArray);
+                pastGuesses += guess;
+                //Check if full word has been guessed
+                wordGuessed = FullWordGuessed(mysteryWordArray);
+            }
+
+            //Display full word and present options
+            Console.WriteLine("\nCongratulations! You've guessed the whole word!");
+            DisplayCurrentGameState(mysteryWordArray, pastGuesses);
         }
 
         /// <summary>
@@ -410,14 +438,15 @@ namespace WordGuessGame
         public static void DisplayCurrentGameState(char[] mysteryWord, string pastGuesses)
         {
             //Display the mystery string
+            Console.Write("\n\n");
             for(int i=0; i < mysteryWord.Length; i++)
             {
-                Console.Write("\n\n");
                 Console.Write($"{mysteryWord[i]} ");
             }
+            Console.WriteLine();
 
             //Display guessses so far
-            Console.Write("Letters guessed: ");
+            Console.Write("\nLetters guessed: ");
             for(int i = 0; i < pastGuesses.Length; i++)
             {
                 Console.Write($"{pastGuesses[i]} ");

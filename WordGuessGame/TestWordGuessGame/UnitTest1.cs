@@ -161,7 +161,5 @@ namespace TestWordGuessGame
 
             Assert.False(Program.LetterInWord(letter, word, mysteryString));
         }
-
-        //Test letter exists replaces occurrence of letter in mystery word
     }
 }
