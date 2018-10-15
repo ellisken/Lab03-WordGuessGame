@@ -8,16 +8,31 @@ Clone the repository, open the WordGuessGame solution in Visual Studio, and run 
 
 ## Example Play
 1. The user sees the home menu.
-* ![home-navigation](/assets/homeNav.PNG)
+
+![home-navigation](/assets/homeNav.PNG)
+
+
 2. The user views all words. 
-* ![all-words-list](/assets/allWords.PNG)
+
+![all-words-list](/assets/allWords.PNG)
+
+
 3. The user adds a word. 
-* ![add-word-view](/assets/addWord.PNG)
+
+![add-word-view](/assets/addWord.PNG)
+
+
 4. The user deletes a word.
-* ![delete-word-view](/assets/deleteWord.PNG)
+
+![delete-word-view](/assets/deleteWord.PNG)
+
+
 5. Game Play.
-* ![game-play-beginning](/assets/gamePlay1.PNG) 
-* ![game-play-end](/assets/gamePlay2.PNG)
+
+![game-play-beginning](/assets/gamePlay1.PNG) 
+
+![game-play-end](/assets/gamePlay2.PNG)
+
 
 
 ## License
